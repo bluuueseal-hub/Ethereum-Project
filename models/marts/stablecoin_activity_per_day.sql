@@ -1,4 +1,4 @@
-{{ config(tags=['stablecoin']) }}
+
 select
 t.date,
 t.token_address,
@@ -21,3 +21,4 @@ t.date,
 t.token_address,
 s.type,
 s.symbol
+
