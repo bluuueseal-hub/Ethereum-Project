@@ -16,3 +16,4 @@ where s.contract_address is not null
 group by 
 t.date,
 s.type
+
