@@ -6,3 +6,4 @@ token_address,
 value
 
 from {{ source('eth','token_transfers')}}
+

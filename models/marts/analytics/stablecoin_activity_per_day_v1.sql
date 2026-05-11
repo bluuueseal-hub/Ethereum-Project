@@ -1,4 +1,4 @@
-
+{{ config(tags=['stablecoin'], grants = {'+select': ['TESTER']})}}
 select
 t.date,
 t.token_address,
@@ -21,4 +21,3 @@ t.date,
 t.token_address,
 s.type,
 s.symbol
-
