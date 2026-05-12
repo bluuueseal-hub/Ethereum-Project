@@ -21,5 +21,3 @@ t.date,
 t.token_address,
 s.type,
 s.symbol
-
-

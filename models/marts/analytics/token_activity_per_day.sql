@@ -12,3 +12,5 @@ where lower(t.token_address) = '{{ var("token_address_var") }}'
 group by 
 t.date,
 t.token_address
+
+
