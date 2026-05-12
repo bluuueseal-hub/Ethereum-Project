@@ -1,6 +1,14 @@
 version: 2
 
 models:
+  - name: stg_token_transfers
+    columns:
+      - name: transaction_hash
+        data_tests:
+          - relationships:
+              to: ref('stg_transactions')
+              field: hash
+
   - name: stg_transactions
     description: Transactions in the Ethereum Blockchain
     columns:
@@ -11,6 +19,7 @@ models:
         data_tests:
           - unique
           - not_null
+
   - name: stablecoin_activity_per_day
     latest_version: 2
     config:
@@ -29,6 +38,9 @@ models:
       - name: type
         data_type: varchar
         description: ""
+        data_tests:
+          - accepted_values:
+              values: ['Hybrid', 'Crypto-backed', 'Fiat-backed']
 
       - name: symbol
         data_type: varchar
@@ -50,3 +62,10 @@ models:
           # This means: use the 'columns' list from above, but exclude country_name
           - include: all
             exclude: [token_address, symbol]
+
+  - name: stg_transactions_enriched
+    columns:
+      - name: value
+        data_tests:
+          - assert_value_amount_positive:
+              field: block_number
