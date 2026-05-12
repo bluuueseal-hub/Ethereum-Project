@@ -20,6 +20,7 @@ models:
           - unique
           - not_null
 
+
   - name: stablecoin_activity_per_day
     latest_version: 2
     config:
@@ -69,3 +70,26 @@ models:
         data_tests:
           - assert_value_amount_positive:
               field: block_number
+
+
+
+
+unit_tests:
+  - name: test_is_valid_transaction_category_breakdown
+    model: stg_transactions_enriched
+    overrides:
+      macros:
+        # unit test this model in "full refresh" mode
+        is_incremental: false 
+    given:
+      - input: ref('stg_transactions')
+        rows:
+          - {receipt_contract_address: 'bla'}
+
+      - input: ref('stg_token_transfers')
+        rows:
+          - {transaction_hash: 'bla'}
+
+    expect:
+      rows:
+        - {transaction_category: 'contract_creation'}
